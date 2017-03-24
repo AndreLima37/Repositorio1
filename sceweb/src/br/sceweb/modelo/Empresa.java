@@ -2,13 +2,26 @@ package br.sceweb.modelo;
 
 
 import java.util.InputMismatchException;
-
+/**
+ * 
+ * @author Lab103 - Andre Lima
+ * Esta é a classe de modelo "Empresa"
+ * Esta classe possui os seguintes atributos:
+ * - CNPJ
+ * - Nome da empresa
+ * - Nome fantasia
+ * - Endereço
+ * - Telefone
+ * Todos os atributos serão armazenados na tabela "empresa" do banco de dados
+ * 
+ */
 public class Empresa {
 	String cnpj;
 	String nomeDaEmpresa;
 	String nomeFantasia;
 	String endereco;
 	String telefone;
+	
 	
 	public String getCnpj() {
 		return cnpj;

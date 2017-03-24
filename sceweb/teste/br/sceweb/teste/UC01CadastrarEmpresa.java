@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.sceweb.modelo.Empresa;
@@ -25,20 +26,26 @@ public class UC01CadastrarEmpresa {
 		empresa.setNomeFantasia("empresa x");
 		empresa.setEndereco("rua taquari");
 		empresa.setTelefone("2222");
+		
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 
+	
 	@Test
 	public void CT01UC01FB_cadastrar_empresa_com_sucesso() {
-		/*empresa = new Empresa();
-		empresaDAO = new EmpresaDAO();*/
-		
 		assertEquals(1, empresaDAO.adiciona(empresa));
-		
 	}
+	
+	@Test(expected=RuntimeException.class)
+	public void CT01A1UC01FB_cadastrar_empresa_com_cnpj_ja_cadastrado() {
+		empresaDAO.adiciona(empresa);
+		empresaDAO.adiciona(empresa);
+	}
+	
+	
 	
 	/*
 	 * verifica a validação dos dados
