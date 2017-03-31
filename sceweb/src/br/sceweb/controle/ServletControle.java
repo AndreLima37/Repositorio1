@@ -30,24 +30,33 @@ public class ServletControle extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @param request - requisicao
+	 * @param response - resposta do html
+	 * @throws ServletException - dispara excecao de servlet
+	 * @throws IOException - dispara excecao de io
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 	throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @param request - requisicao
+	 * @param response - resposta do html
+	 * @throws ServletException - dispara excecao de servlet
+	 * @throws IOException - dispara excecao de io
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("erro", null);
 		executaComando(request, response);
 	}
-
+	
+	/**
+	 * @param request - requisicao
+	 * @param response - resposta do html
+	 * @throws ServletException - dispara excecao de servlet
+	 * @throws IOException - dispara excecao de io
+	 */
 	protected void executaComando(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String parametro = request.getParameter("acao");
@@ -77,7 +86,7 @@ public class ServletControle extends HttpServlet {
 			String cnpj = request.getParameter("txtCNPJ");
 			logger.info("consulta empresa  = " + cnpj);
 			try {
-				/*if (!cnpj.isEmpty()) {
+				if (!cnpj.isEmpty()) {
 					empresa = consulta(cnpj);
 					if (empresa != null){
 						logger.info("consulta empresa nome da empresa  = " + empresa.getNomeDaEmpresa());
@@ -93,7 +102,7 @@ public class ServletControle extends HttpServlet {
 					}
 				} else {
 					request.setAttribute("msg", "cnpj invalido");
-				}*/
+				}
 			} catch (Exception e) {
 				logger.info(e.getMessage() + e.getCause());
 			}
@@ -101,8 +110,16 @@ public class ServletControle extends HttpServlet {
 			
 		}
 
+		
 	}
-
+	/**
+	 * @param cnpj - cnpj da empresa a ser cadastrada
+	 * @param nomeDaEmpresa - nome da empresa a ser cadastrada
+	 * @param nomeFantasia - nome fantasia da empresa
+	 * @param endereco - endereço fantasia da empresa a ser cadastrada
+	 * @param telefone - telefone da empresa a ser cadastrada
+	 * @return deve ser retornado uma mensagem com sucesso ou não no cadastro da empresa
+	 */
 	public String cadastrarEmpresa(String cnpj, String nomeDaEmpresa, String nomeFantasia, String endereco,
 			String telefone) {
 		String msg = "";
@@ -124,12 +141,20 @@ public class ServletControle extends HttpServlet {
 		return msg;
 	}
 
-	/*public Empresa consulta(String cnpj) {
+	/**
+	 * @param cnpj - cnpj da empresa a ser consultada
+	 * @return retorna uma empresa consultada do banco de dados
+	 */
+	public Empresa consulta(String cnpj) {
 		logger.info("consulta empresa 2 = " + cnpj);
 		EmpresaDAO empresaDAO = new EmpresaDAO();
 		return empresaDAO.consultaEmpresa(cnpj);
-	}*/
+	}
 
+	/**
+	 * @param cnpj - cnpj da empresa a ser excluida
+	 * @return retorna uma mensagem dizendo se uma empresa foi ou não excluida com uscesso
+	 */
 	public String excluirEmpresa(String cnpj) {
 		String msg = "";
 		EmpresaDAO empresaDAO = new EmpresaDAO();
